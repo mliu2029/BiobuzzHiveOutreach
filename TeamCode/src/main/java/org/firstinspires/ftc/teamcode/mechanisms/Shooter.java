@@ -42,9 +42,11 @@ public class Shooter implements Mechanism {
             if (driver.dpad_down) enabled = false;
             launcher.setVelocity(enabled ? targetVelocity : 0);
 
-            boolean ready = enabled && launcher.getVelocity() > minimumVelocity;
-
         });
+    }
+
+    public boolean isReady() {
+        return enabled && launcher.getVelocity() >= minimumVelocity;
     }
 
     public void adjustVelocity(int delta) {

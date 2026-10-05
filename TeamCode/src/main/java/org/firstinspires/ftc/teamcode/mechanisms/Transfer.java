@@ -9,16 +9,18 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import dev.nextftc.robot.Mechanism;
 
 public class Transfer implements Mechanism {
+    private DcMotorEx transfer;
     private DcMotorEx leftTransfer;
-    private DcMotorEx rightTransfer;
+
     private Gamepad driver;
 
     public void initialize(HardwareMap hardwareMap, Gamepad driver) {
         this.driver = driver;
-        leftTransfer = hardwareMap.get(DcMotorEx.class, "leftTransfer");
-        rightTransfer = hardwareMap.get(DcMotorEx.class, "rightTransfer");
+        transfer = hardwareMap.get(DcMotorEx.class, "transfer");
+        leftTransfer=hardwareMap.get(DcMotorEx.class,"transfer2");
+        transfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftTransfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightTransfer.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         stop();
     }
 
@@ -36,8 +38,8 @@ public class Transfer implements Mechanism {
     }
 
     private void setPower(double power) {
-        leftTransfer.setPower(power);
-        rightTransfer.setPower(power);
+       transfer.setPower(power);
+       leftTransfer.setPower(power);
     }
 
     public void stop() {
