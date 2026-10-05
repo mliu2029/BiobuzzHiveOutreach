@@ -24,6 +24,7 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.pedropathing.ivy.Command;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import dev.nextftc.robot.Mechanism;
@@ -68,7 +69,6 @@ public class Drivetrain implements Mechanism {
         double rb = forward + strafe - rotate;
         double maximum = Math.max(1.0, Math.max(Math.max(Math.abs(lf), Math.abs(rf)),
                 Math.max(Math.abs(lb), Math.abs(rb))));
-
         leftFront.setPower(lf / maximum * driveScale);
         rightFront.setPower(rf / maximum * driveScale);
         leftBack.setPower(lb / maximum * driveScale);

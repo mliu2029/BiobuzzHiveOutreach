@@ -30,7 +30,7 @@ public class Shooter implements Mechanism {
 
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,
-                new PIDFCoefficients(40, 0, 0, 12.5));
+                new PIDFCoefficients(40, 0, 0, 12.5)); // cooked pid
 
         stop();
     }
@@ -39,17 +39,18 @@ public class Shooter implements Mechanism {
     public Command getDefaultCommand() {
         return infinite(() -> {
             if (driver.dpad_up) enabled = true;
-            if (driver.dpad_down) enabled = false;
             launcher.setVelocity(enabled ? targetVelocity : 0);
-
-            boolean ready = enabled && launcher.getVelocity() > minimumVelocity;
 
         });
     }
 
-    public void adjustVelocity(int delta) {
-        targetVelocity += delta;
-        minimumVelocity += delta;
+    public boolean isReady() {
+        return enabled && launcher.getVelocity() >= minimumVelocity;
+    }
+
+    public void adjustVelocity(int change) {
+        targetVelocity += change;
+        minimumVelocity += change;
     }
 
     public int getTargetVelocity() {
