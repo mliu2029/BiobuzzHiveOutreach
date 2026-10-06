@@ -25,15 +25,14 @@ package org.firstinspires.ftc.teamcode;
 import dev.nextftc.robot.opmode.BulkReadHook;
 import dev.nextftc.robot.opmode.NextOpMode;
 
-/** Common NextFTC lifecycle for the three original StarterBot drive profiles. */
 public abstract class StarterBotTeleop extends NextOpMode {
     protected final Robot robot;
     private final int velocityStep;
 
     protected StarterBotTeleop(Robot robot, double driveScale, int velocityStep) {
-        super(robot, BulkReadHook.INSTANCE);
+        super(robot, BulkReadHook.INSTANCE);// change this to lynx hubs asap
         this.robot = robot;
-        this.velocityStep = velocityStep;
+        this.velocityStep = velocityStep; //25
         robot.initialize(hardwareMap, gamepad1, driveScale);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -41,7 +40,6 @@ public abstract class StarterBotTeleop extends NextOpMode {
 
     @Override
     public void periodic() {
-        // Edge checks preserve one velocity change per press, including held buttons.
         if (gamepad1.dpadRightWasPressed()) robot.shooter.adjustVelocity(velocityStep);
         if (gamepad1.dpadLeftWasPressed()) robot.shooter.adjustVelocity(-velocityStep);
         telemetry.addData("TargetVelocity", robot.shooter.getTargetVelocity());

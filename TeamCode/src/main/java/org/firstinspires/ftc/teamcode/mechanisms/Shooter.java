@@ -45,9 +45,6 @@ public class Shooter implements Mechanism {
         });
     }
 
-    public boolean isReady() {
-        return enabled && launcher.getVelocity() >= minimumVelocity;
-    }
 
     public void adjustVelocity(int change) {
         targetVelocity += change;
@@ -60,7 +57,7 @@ public class Shooter implements Mechanism {
 
     public int getMinimumVelocity() {
         return minimumVelocity;
-    }
+    } //unused for now
 
     public double getVelocity() {
         return launcher.getVelocity();
